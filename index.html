@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!--
+    Luxury Portfolio — Khushal Sehrawat
+    Stack: HTML5 + Bootstrap 5 + GSAP + AOS
+    Notes:
+    - Keep this as a single-file drop-in (index.html)
+    - Replace placeholder links + add real project URLs where available
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Khushal Sehrawat — Java Full-Stack Developer</title>
+  <meta name="description" content="Java Full-Stack Developer (Spring Boot, Microservices, REST APIs, JWT, MySQL, Docker, Kafka). Built SentinelAI, SUEMS, DuskyHospital, BeneLoan. Recruiter-focused portfolio." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#070A12" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Khushal Sehrawat — Java Full-Stack Developer" />
+  <meta property="og:description" content="Recruiter-focused portfolio: Spring Boot, REST APIs, JWT Security, MySQL, Docker, Kafka. Projects: SentinelAI, SUEMS, DuskyHospital, BeneLoan." />
+  <meta property="og:type" content="website" />
+
+  <!-- Bootstrap (latest v5) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS (scroll reveals) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Premium fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Khushal Sehrawat",
+    "jobTitle": "Java Full-Stack Developer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New Delhi",
+      "addressRegion": "Delhi",
+      "addressCountry": "IN"
+    },
+    "email": "mailto:khushalsehrawat28@gmail.com",
+    "telephone": "+91-9899788325",
+    "sameAs": [
+      "YOUR_LINKEDIN_URL",
+      "YOUR_GITHUB_URL"
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg0:#05060A;
+      --bg1:#070A12;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.10);
+      --stroke: rgba(255,255,255,0.14);
+      --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.60);
+      --txt: rgba(255,255,255,0.92);
+      --accent1:#7C3AED; /* violet */
+      --accent2:#06B6D4; /* cyan */
+      --accent3:#22C55E; /* green */
+      --gold:#F6C177;   /* luxury highlight */
+      --shadow: 0 22px 60px rgba(0,0,0,0.55);
+      --shadow2: 0 12px 28px rgba(0,0,0,0.45);
+      --radius: 18px;
+      --radius2: 24px;
+    }
+
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 15% 12%, rgba(124,58,237,0.25), transparent 55%),
+                  radial-gradient(1000px 700px at 85% 18%, rgba(6,182,212,0.22), transparent 55%),
+                  radial-gradient(900px 600px at 70% 90%, rgba(34,197,94,0.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1) 45%, #05060A);
+      color: var(--txt);
+      overflow-x:hidden;
+    }
+
+    /* Subtle animated grain for premium texture */
+    .grain{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="180" height="180" filter="url(%23n)" opacity=".24"/></svg>');
+      mix-blend-mode: overlay;
+      opacity:0.07;
+      z-index:0;
+    }
+
+    /* Soft vignette */
+    .vignette{
+      pointer-events:none;
+      position:fixed;
+      inset:-10%;
+      background: radial-gradient(circle at center, transparent 45%, rgba(0,0,0,0.55) 85%);
+      opacity:0.65;
+      z-index:0;
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+    }
+
+    /* Navbar */
+    .nav-blur{
+      background: rgba(6,8,14,0.58);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .navbar-brand{
+      font-family: Manrope, Inter, sans-serif;
+      letter-spacing: 0.2px;
+      font-weight: 700;
+    }
+    .brand-dot{
+      display:inline-block;
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent1));
+      margin-left:8px;
+      box-shadow: 0 0 0 6px rgba(124,58,237,0.12);
+    }
+    .nav-link{
+      color: rgba(255,255,255,0.78) !important;
+      font-weight: 500;
+      padding: .55rem .9rem !important;
+      border-radius: 999px;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .nav-link:hover{
+      color: rgba(255,255,255,0.95) !important;
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-1px);
+    }
+    .nav-link.active{
+      color: rgba(255,255,255,0.96) !important;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    /* Buttons */
+    .btn-lux{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(135deg, rgba(124,58,237,0.92), rgba(6,182,212,0.80));
+      color: white;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+      border-radius: 999px;
+      padding: .85rem 1.05rem;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .btn-lux:hover{ transform: translateY(-2px); filter: brightness(1.03); }
+    .btn-ghost{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      border-radius: 999px;
+      padding: .85rem 1.05rem;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn-ghost:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.09);
+    }
+
+    /* Cards (Glass) */
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow2);
+    }
+    .glass-soft{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+    }
+
+    /* Hero */
+    .hero{
+      padding-top: 6.5rem;
+      padding-bottom: 3.5rem;
+    }
+    .eyebrow{
+      display:inline-flex;
+      gap:.55rem;
+      align-items:center;
+      padding:.45rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
+      font-size: .92rem;
+    }
+    .eyebrow i{ color: var(--gold); }
+    .hero h1{
+      font-family: Manrope, Inter, sans-serif;
+      font-weight: 750;
+      letter-spacing: -0.6px;
+      line-height: 1.05;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 4.5vw, 3.65rem);
+    }
+    .hero p.lead{
+      color: rgba(255,255,255,0.78);
+      font-size: 1.06rem;
+      line-height: 1.55;
+      max-width: 58ch;
+    }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 1.25rem;
+    }
+    .metric{
+      padding: .95rem 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+    }
+    .metric .k{
+      font-family: Manrope, Inter, sans-serif;
+      font-weight: 700;
+      letter-spacing:-0.2px;
+      font-size: 1.05rem;
+    }
+    .metric .v{
+      color: rgba(255,255,255,0.72);
+      font-size: .92rem;
+      margin-top: .25rem;
+    }
+
+    .hero-side{
+      position:relative;
+      overflow:hidden;
+      min-height: 420px;
+    }
+    .hero-orb{
+      position:absolute;
+      inset:-60px -40px auto auto;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(246,193,119,0.22), transparent 55%),
+                  radial-gradient(circle at 55% 45%, rgba(124,58,237,0.28), transparent 58%),
+                  radial-gradient(circle at 68% 70%, rgba(6,182,212,0.25), transparent 58%);
+      filter: blur(2px);
+      opacity: 0.9;
+    }
+    .hero-badge{
+      position:absolute;
+      left: 18px;
+      top: 18px;
+      padding: .75rem .85rem;
+      border-radius: 16px;
+      max-width: 320px;
+    }
+    .hero-badge .t{
+      font-weight: 700;
+      letter-spacing:-0.2px;
+    }
+    .hero-badge .s{
+      color: rgba(255,255,255,0.72);
+      font-size: .92rem;
+      margin-top: .25rem;
+    }
+
+    .stack-grid{
+      position:absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+    .chip{
+      display:flex;
+      gap:.65rem;
+      align-items:center;
+      padding: .75rem .85rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+    }
+    .chip i{
+      width: 34px;
+      height: 34px;
+      display:grid;
+      place-items:center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .chip .a{ font-weight: 650; letter-spacing:-0.2px; font-size:.98rem; }
+    .chip .b{ color: rgba(255,255,255,0.70); font-size:.9rem; }
+
+    /* Section titles */
+    section{ padding: 4.2rem 0; }
+    .section-title{
+      font-family: Manrope, Inter, sans-serif;
+      font-weight: 750;
+      letter-spacing: -0.4px;
+      font-size: 1.75rem;
+      margin-bottom: .65rem;
+    }
+    .section-sub{
+      color: rgba(255,255,255,0.72);
+      max-width: 70ch;
+    }
+
+    /* Project cards */
+    .p-card{
+      position:relative;
+      padding: 1.2rem;
+      height:100%;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+      overflow:hidden;
+    }
+    .p-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(500px 260px at 20% 0%, rgba(124,58,237,0.18), transparent 60%),
+                  radial-gradient(520px 300px at 80% 10%, rgba(6,182,212,0.18), transparent 62%);
+      opacity:0.55;
+      z-index:0;
+    }
+    .p-card > *{ position:relative; z-index:1; }
+    .p-card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.38rem .6rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.80);
+      font-size:.84rem;
+      margin: 0 .4rem .4rem 0;
+      white-space:nowrap;
+    }
+
+    /* Timeline */
+    .timeline{
+      position:relative;
+      padding-left: 22px;
+    }
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(124,58,237,0.55), rgba(6,182,212,0.35), transparent);
+      opacity:0.85;
+    }
+    .t-item{
+      position:relative;
+      padding: 1.1rem 1.1rem 1.1rem 1.1rem;
+      margin-bottom: 12px;
+    }
+    .t-item:before{
+      content:"";
+      position:absolute;
+      left: -1px;
+      top: 18px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.95), rgba(6,182,212,0.85));
+      box-shadow: 0 0 0 6px rgba(124,58,237,0.10);
+      border: 1px solid rgba(255,255,255,0.20);
+    }
+
+    /* Footer */
+    footer{
+      padding: 2.8rem 0 2.4rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.70);
+    }
+
+    /* Small enhancements */
+    .muted{ color: rgba(255,255,255,0.72); }
+    .kbd{
+      font-size:.82rem;
+      padding:.12rem .42rem;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
+    }
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,0.10);
+      margin: 1.2rem 0;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 991.98px){
+      .hero{ padding-top: 5.6rem; }
+      .hero-metrics{ grid-template-columns: 1fr; }
+      .hero-side{ min-height: 420px; margin-top: 1.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+
+  <div class="page">
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-blur">
+      <div class="container">
+        <a class="navbar-brand" href="#top" aria-label="Home">
+          Khushal<span class="brand-dot"></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+                aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 mt-3 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-lux btn-sm" href="#contact">
+                <i class="fa-solid fa-paper-plane me-2"></i>Hire-ready
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="top" class="hero">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="eyebrow" data-aos="fade-up" data-aos-duration="700">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Java Full-Stack Developer • Spring Boot • Microservices • Secure APIs</span>
+              <span class="kbd ms-2">Open to work</span>
+            </div>
+
+            <h1 class="reveal">
+              Building <span style="background:linear-gradient(135deg,var(--gold),rgba(255,255,255,0.92));-webkit-background-clip:text;background-clip:text;color:transparent;">production-grade</span>
+              systems with clean architecture, security, and measurable impact.
+            </h1>
+
+            <p class="lead reveal2">
+              I design and ship backend-first products with <b>Spring Boot</b>, <b>JWT security</b>, <b>REST APIs</b>,
+              and <b>data-driven architecture</b>—from GenAI log intelligence (SentinelAI) to real-time renewable energy analytics (SUEMS).
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 mt-3 reveal3">
+              <a class="btn btn-lux" href="#projects">
+                <i class="fa-solid fa-diagram-project me-2"></i>View Projects
+              </a>
+              <a class="btn btn-ghost" href="YOUR_GITHUB_URL" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github me-2"></i>GitHub
+              </a>
+              <a class="btn btn-ghost" href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-linkedin me-2"></i>LinkedIn
+              </a>
+            </div>
+
+            <div class="hero-metrics mt-4" data-aos="fade-up" data-aos-delay="120" data-aos-duration="700">
+              <div class="metric">
+                <div class="k">Security + Reliability</div>
+                <div class="v">JWT auth, role-based access, clean REST design</div>
+              </div>
+              <div class="metric">
+                <div class="k">Backend-first Impact</div>
+                <div class="v">Schema design, optimized queries, scalable APIs</div>
+              </div>
+              <div class="metric">
+                <div class="k">Real Deployments</div>
+                <div class="v">Docker + Render workflows for production-style delivery</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="glass hero-side p-3 p-sm-4" data-aos="zoom-in" data-aos-duration="800">
+              <div class="hero-orb"></div>
+
+              <div class="glass-soft hero-badge">
+                <div class="t"><i class="fa-solid fa-location-dot me-2" style="color:var(--gold)"></i>New Delhi, India</div>
+                <div class="s">Backend / Full-Stack roles • Sustainability-driven & product teams</div>
+              </div>
+
+              <div class="stack-grid">
+                <div class="chip">
+                  <i class="fa-brands fa-java"></i>
+                  <div>
+                    <div class="a">Spring Boot</div>
+                    <div class="b">REST APIs • JPA/Hibernate</div>
+                  </div>
+                </div>
+                <div class="chip">
+                  <i class="fa-solid fa-lock"></i>
+                  <div>
+                    <div class="a">Security</div>
+                    <div class="b">JWT • Role-based access</div>
+                  </div>
+                </div>
+                <div class="chip">
+                  <i class="fa-solid fa-database"></i>
+                  <div>
+                    <div class="a">Data</div>
+                    <div class="b">MySQL • PostgreSQL</div>
+                  </div>
+                </div>
+                <div class="chip">
+                  <i class="fa-brands fa-docker"></i>
+                  <div>
+                    <div class="a">Delivery</div>
+                    <div class="b">Docker • Render • GitHub</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-7">
+            <h2 class="section-title" data-aos="fade-up">About</h2>
+            <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+              I’m a <b>Java Full-Stack Developer</b> focused on building secure, scalable systems that are easy to operate in production.
+              My work includes <b>GenAI-assisted incident analysis</b> (SentinelAI), a <b>real-time renewable energy analytics platform</b> (SUEMS),
+              and enterprise-style APIs for healthcare and finance domains.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="row g-3">
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="120">
+                <div class="glass-soft p-3 h-100">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa-solid fa-bullseye" style="color:var(--gold)"></i>
+                    <div class="fw-semibold">Recruiter Summary</div>
+                  </div>
+                  <div class="muted">
+                    Spring Boot • REST APIs • JWT Security • MySQL optimization • microservices mindset • production-first delivery.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="160">
+                <div class="glass-soft p-3 h-100">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa-solid fa-sparkles" style="color:var(--gold)"></i>
+                    <div class="fw-semibold">How I Work</div>
+                  </div>
+                  <div class="muted">
+                    Clean architecture, consistent error handling, secure defaults, and dashboards/observability hooks built-in.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="140">
+            <div class="glass p-4">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                  <div class="fw-semibold" style="font-family:Manrope,Inter,sans-serif;font-size:1.15rem;">Quick Contact</div>
+                  <div class="muted">Fastest response: Email</div>
+                </div>
+                <span class="tag"><i class="fa-solid fa-circle-check" style="color:var(--accent3)"></i> Available for interviews</span>
+              </div>
+              <div class="divider"></div>
+
+              <div class="d-grid gap-2">
+                <button class="btn btn-ghost text-start" id="copyEmailBtn" type="button">
+                  <i class="fa-solid fa-envelope me-2"></i>
+                  <span class="me-2">khushalsehrawat28@gmail.com</span>
+                  <span class="muted" id="copyEmailHint">(click to copy)</span>
+                </button>
+                <a class="btn btn-ghost text-start" href="tel:+919899788325">
+                  <i class="fa-solid fa-phone me-2"></i> +91 9899788325
+                </a>
+                <a class="btn btn-ghost text-start" href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer">
+                  <i class="fa-brands fa-linkedin me-2"></i> LinkedIn Profile
+                </a>
+                <a class="btn btn-lux" href="#contact">
+                  <i class="fa-solid fa-calendar-check me-2"></i>Schedule a conversation
+                </a>
+              </div>
+
+              <div class="mt-3 muted" style="font-size:.92rem;">
+                Tip: Keep your resume + GitHub ready—this portfolio is designed to make recruiters click both.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Skills that ship in production</h2>
+        <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+          A recruiter-friendly snapshot of the stack I use to deliver secure APIs, scalable services, and reliable deployments.
+        </p>
+
+        <div class="row g-3 mt-3">
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass p-3 h-100">
+              <div class="fw-semibold mb-2"><i class="fa-solid fa-server me-2" style="color:var(--gold)"></i>Backend</div>
+              <div class="d-flex flex-wrap">
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Spring MVC</span>
+                <span class="tag">Spring Security</span>
+                <span class="tag">JPA/Hibernate</span>
+                <span class="tag">Microservices</span>
+                <span class="tag">REST APIs</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+            <div class="glass p-3 h-100">
+              <div class="fw-semibold mb-2"><i class="fa-solid fa-shield me-2" style="color:var(--gold)"></i>Security</div>
+              <div class="d-flex flex-wrap">
+                <span class="tag">JWT</span>
+                <span class="tag">RBAC</span>
+                <span class="tag">Secure defaults</span>
+                <span class="tag">API hardening</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass p-3 h-100">
+              <div class="fw-semibold mb-2"><i class="fa-solid fa-database me-2" style="color:var(--gold)"></i>Data</div>
+              <div class="d-flex flex-wrap">
+                <span class="tag">MySQL</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Schema design</span>
+                <span class="tag">Optimization</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+            <div class="glass p-3 h-100">
+              <div class="fw-semibold mb-2"><i class="fa-solid fa-rocket me-2" style="color:var(--gold)"></i>Delivery</div>
+              <div class="d-flex flex-wrap">
+                <span class="tag">Docker</span>
+                <span class="tag">Git/GitHub</span>
+                <span class="tag">GitHub Actions</span>
+                <span class="tag">Postman</span>
+                <span class="tag">Render</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mt-1">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="140">
+            <div class="glass p-4">
+              <div class="fw-semibold mb-2">Languages</div>
+              <div class="muted">Java • Python • JavaScript • TypeScript • C/C++</div>
+              <div class="divider"></div>
+              <div class="fw-semibold mb-2">Frontend (when needed)</div>
+              <div class="muted">React • Bootstrap • HTML/CSS • jQuery • Angular (familiar)</div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="180">
+            <div class="glass p-4">
+              <div class="fw-semibold mb-2">Strengths recruiters care about</div>
+              <ul class="muted mb-0">
+                <li>Consistent API design + clean service/repo separation</li>
+                <li>Security-first implementation (JWT + RBAC)</li>
+                <li>Production-minded delivery (Docker + deploy workflows)</li>
+                <li>Clear communication with stakeholders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Selected Projects</h2>
+        <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+          Built with a “ship-ready” mindset: authentication, persistence, dashboards, and maintainable structure.
+        </p>
+
+        <div class="row g-3 mt-3">
+          <!-- SentinelAI -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass p-card">
+              <div class="d-flex align-items-start justify-content-between gap-2">
+                <div>
+                  <div class="fw-semibold" style="font-size:1.18rem;font-family:Manrope,Inter,sans-serif;">
+                    SentinelAI <span class="muted" style="font-weight:500;">(GenAI Incident Intelligence)</span>
+                  </div>
+                  <div class="muted mt-1">
+                    Interprets security logs, extracts root-cause insights, assigns severity, and enables natural-language troubleshooting over incidents.
+                  </div>
+                </div>
+                <button class="btn btn-ghost btn-sm" data-project="sentinel" type="button">
+                  Details <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+              </div>
+
+              <div class="mt-3">
+                <span class="tag"><i class="fa-solid fa-shield" style="color:var(--gold)"></i>JWT Auth</span>
+                <span class="tag">REST APIs</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">LLM-assisted analysis</span>
+                <span class="tag">Log dashboard</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-lux btn-sm" href="YOUR_GITHUB_SENTINELAI" target="_blank" rel="noreferrer">
+                  <i class="fa-brands fa-github me-2"></i>Repo
+                </a>
+                <a class="btn btn-ghost btn-sm" href="#contact">
+                  <i class="fa-solid fa-message me-2"></i>Discuss Architecture
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUEMS -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="160">
+            <div class="glass p-card">
+              <div class="d-flex align-items-start justify-content-between gap-2">
+                <div>
+                  <div class="fw-semibold" style="font-size:1.18rem;font-family:Manrope,Inter,sans-serif;">
+                    SUEMS <span class="muted" style="font-weight:500;">(Renewable Analytics Platform)</span>
+                  </div>
+                  <div class="muted mt-1">
+                    Real-time simulation + analytics for solar, wind, and grid data using schedulers and REST APIs; production-style deploy with Docker.
+                  </div>
+                </div>
+                <button class="btn btn-ghost btn-sm" data-project="suems" type="button">
+                  Details <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+              </div>
+
+              <div class="mt-3">
+                <span class="tag"><i class="fa-solid fa-bolt" style="color:var(--gold)"></i>Schedulers</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Docker</span>
+                <span class="tag">REST APIs</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-lux btn-sm" href="YOUR_GITHUB_SUEMS" target="_blank" rel="noreferrer">
+                  <i class="fa-brands fa-github me-2"></i>Repo
+                </a>
+                <a class="btn btn-ghost btn-sm" href="#contact">
+                  <i class="fa-solid fa-briefcase me-2"></i>Hiring Fit
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- DuskyHospital -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass p-card">
+              <div class="d-flex align-items-start justify-content-between gap-2">
+                <div>
+                  <div class="fw-semibold" style="font-size:1.18rem;font-family:Manrope,Inter,sans-serif;">
+                    DuskyHospital <span class="muted" style="font-weight:500;">(Hospital Management API)</span>
+                  </div>
+                  <div class="muted mt-1">
+                    Role-based APIs for patients, doctors, appointments, tests, diseases, and bills — built with Spring Security + JWT.
+                  </div>
+                </div>
+                <button class="btn btn-ghost btn-sm" data-project="hospital" type="button">
+                  Details <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+              </div>
+
+              <div class="mt-3">
+                <span class="tag"><i class="fa-solid fa-hospital" style="color:var(--gold)"></i>RBAC</span>
+                <span class="tag">Spring Security</span>
+                <span class="tag">JWT</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">JPA/Hibernate</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-lux btn-sm" href="YOUR_GITHUB_DUSKYHOSPITAL" target="_blank" rel="noreferrer">
+                  <i class="fa-brands fa-github me-2"></i>Repo
+                </a>
+                <a class="btn btn-ghost btn-sm" href="#contact">
+                  <i class="fa-solid fa-code me-2"></i>See Patterns
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- BeneLoan -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="240">
+            <div class="glass p-card">
+              <div class="d-flex align-items-start justify-content-between gap-2">
+                <div>
+                  <div class="fw-semibold" style="font-size:1.18rem;font-family:Manrope,Inter,sans-serif;">
+                    BeneLoan <span class="muted" style="font-weight:500;">(Loan & Beneficiary System)</span>
+                  </div>
+                  <div class="muted mt-1">
+                    Secure backend with JWT, CSV upload + validation, and integrity-focused schema between beneficiaries and loans.
+                  </div>
+                </div>
+                <button class="btn btn-ghost btn-sm" data-project="loan" type="button">
+                  Details <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+              </div>
+
+              <div class="mt-3">
+                <span class="tag"><i class="fa-solid fa-file-csv" style="color:var(--gold)"></i>CSV Import</span>
+                <span class="tag">Java 21</span>
+                <span class="tag">JWT</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">REST APIs</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-lux btn-sm" href="YOUR_GITHUB_BENELOAN" target="_blank" rel="noreferrer">
+                  <i class="fa-brands fa-github me-2"></i>Repo
+                </a>
+                <a class="btn btn-ghost btn-sm" href="#contact">
+                  <i class="fa-solid fa-magnifying-glass me-2"></i>Review Design
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 muted" data-aos="fade-up" data-aos-delay="120">
+          Want to see a specific project deep-dive? I can walk you through architecture, security, DB design, and deployment choices.
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <h2 class="section-title" data-aos="fade-up">Experience</h2>
+            <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+              Cross-functional delivery: development, UI polish, communication with stakeholders, and execution speed.
+            </p>
+
+            <div class="timeline mt-4" data-aos="fade-up" data-aos-delay="120">
+              <div class="glass t-item">
+                <div class="d-flex justify-content-between flex-wrap gap-2">
+                  <div class="fw-semibold">HURLAD By The Eaglets</div>
+                  <div class="muted">May 2024 — May 2025</div>
+                </div>
+                <div class="muted mt-2">
+                  Full Stack Developer — streamlined workflows, improved UI consistency, and aligned delivery with client requirements.
+                </div>
+              </div>
+
+              <div class="glass t-item">
+                <div class="d-flex justify-content-between flex-wrap gap-2">
+                  <div class="fw-semibold">TechFest, IIT Bombay</div>
+                  <div class="muted">Jun 2023 — Apr 2024</div>
+                </div>
+                <div class="muted mt-2">
+                  College Ambassador / Intern — marketing execution and React/JS graphic design project experience.
+                </div>
+              </div>
+
+              <div class="glass t-item">
+                <div class="d-flex justify-content-between flex-wrap gap-2">
+                  <div class="fw-semibold">Udemy</div>
+                  <div class="muted">Sep 2023 — Oct 2023</div>
+                </div>
+                <div class="muted mt-2">
+                  Certified course work — graphic design foundations for sharper UI/branding output.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <h2 class="section-title" data-aos="fade-up">Education</h2>
+            <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+              Strong CS foundation and ongoing specialization in backend systems and security-first design.
+            </p>
+
+            <div class="glass p-4 mt-4" data-aos="fade-up" data-aos-delay="120">
+              <div class="d-flex justify-content-between flex-wrap gap-2">
+                <div class="fw-semibold">Maharishi Dayanand University</div>
+                <div class="muted">Sep 2022 — May 2026</div>
+              </div>
+              <div class="muted mt-2">B.Tech, Computer Science Engineering • New Delhi</div>
+              <div class="divider"></div>
+              <div class="fw-semibold mb-2">Relevant coursework</div>
+              <div class="muted">
+                Algorithms • AI • Computer Architecture • Computational Theory • Software Foundations
+              </div>
+              <div class="divider"></div>
+              <div class="fw-semibold mb-2">Certifications</div>
+              <div class="muted">
+                Java Full Stack (CodeForSuccess) • Programming with Python (Internshala)
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Contact</h2>
+        <p class="section-sub" data-aos="fade-up" data-aos-delay="80">
+          Recruiter-friendly: quick details, quick response. If you’re hiring for backend or full-stack, I’m ready to interview.
+        </p>
+
+        <div class="row g-3 mt-3">
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass p-4">
+              <!-- Simple mailto form (no backend) -->
+              <div class="fw-semibold mb-2" style="font-family:Manrope,Inter,sans-serif;font-size:1.15rem;">
+                Send an email in 10 seconds
+              </div>
+              <div class="muted mb-3">This opens your email client with a pre-filled message.</div>
+
+              <form id="mailtoForm" class="row g-2">
+                <div class="col-md-6">
+                  <input class="form-control bg-transparent text-white border-0 glass-soft" style="padding:.9rem"
+                         id="mName" type="text" placeholder="Your name" required>
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control bg-transparent text-white border-0 glass-soft" style="padding:.9rem"
+                         id="mCompany" type="text" placeholder="Company / Team" required>
+                </div>
+                <div class="col-12">
+                  <input class="form-control bg-transparent text-white border-0 glass-soft" style="padding:.9rem"
+                         id="mRole" type="text" placeholder="Role (Backend / Full-Stack)" required>
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control bg-transparent text-white border-0 glass-soft" style="padding:.9rem;min-height:120px"
+                            id="mMsg" placeholder="Message (what are you hiring for + timeline?)" required></textarea>
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-2 mt-2">
+                  <button class="btn btn-lux" type="submit">
+                    <i class="fa-solid fa-envelope me-2"></i>Open Email Draft
+                  </button>
+                  <a class="btn btn-ghost" href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer">
+                    <i class="fa-brands fa-linkedin me-2"></i>Message on LinkedIn
+                  </a>
+                  <a class="btn btn-ghost" href="YOUR_GITHUB_URL" target="_blank" rel="noreferrer">
+                    <i class="fa-brands fa-github me-2"></i>Review Code
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="160">
+            <div class="glass p-4 h-100">
+              <div class="fw-semibold mb-2" style="font-family:Manrope,Inter,sans-serif;font-size:1.15rem;">
+                Hiring snapshot
+              </div>
+              <div class="muted">
+                Best fit for teams that value clean backend architecture, security-first defaults, and deployable systems.
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="d-grid gap-2">
+                <div class="glass-soft p-3">
+                  <div class="fw-semibold">Primary strengths</div>
+                  <div class="muted mt-1">Spring Boot • JWT • REST APIs • DB design/optimization • Docker delivery</div>
+                </div>
+                <div class="glass-soft p-3">
+                  <div class="fw-semibold">Domains built</div>
+                  <div class="muted mt-1">Security log intelligence • Energy analytics • Healthcare API • Loan management</div>
+                </div>
+                <div class="glass-soft p-3">
+                  <div class="fw-semibold">Availability</div>
+                  <div class="muted mt-1">Immediate interview availability • New Delhi • Remote/Hybrid friendly</div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="muted" style="font-size:.92rem;">
+                Shortcut: Press <span class="kbd">G</span> to jump to Projects, <span class="kbd">C</span> to jump to Contact.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div>
+            <div class="fw-semibold" style="font-family:Manrope,Inter,sans-serif;">Khushal Sehrawat</div>
+            <div class="muted">Java Full-Stack Developer • Spring Boot • Secure APIs</div>
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-ghost btn-sm" href="YOUR_LINKEDIN_URL" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="btn btn-ghost btn-sm" href="YOUR_GITHUB_URL" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i></a>
+            <button class="btn btn-ghost btn-sm" id="toTopBtn" type="button"><i class="fa-solid fa-arrow-up"></i></button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Project Details Modal -->
+  <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content glass" style="border:1px solid rgba(255,255,255,0.12)">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="projectTitle" style="font-family:Manrope,Inter,sans-serif;font-weight:750;"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <p class="muted" id="projectDesc"></p>
+          <div class="d-flex flex-wrap" id="projectTags"></div>
+          <div class="divider"></div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="glass-soft p-3">
+                <div class="fw-semibold mb-1">Highlights</div>
+                <ul class="muted mb-0" id="projectBullets"></ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass-soft p-3">
+                <div class="fw-semibold mb-1">Recruiter value</div>
+                <div class="muted" id="projectValue"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <a class="btn btn-lux" id="projectLink" href="#" target="_blank" rel="noreferrer">
+            <i class="fa-brands fa-github me-2"></i>Open Repo
+          </a>
+          <button class="btn btn-ghost" data-bs-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS libs -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    /*
+      Animation logic overview:
+      - AOS: scroll-based reveals (lightweight & clean)
+      - GSAP: premium hero load sequence + micro-interactions
+      - JS: active nav highlighting + smooth utilities (copy email, keyboard shortcuts)
+    */
+
+    // 1) AOS init (scroll reveal)
+    AOS.init({
+      once: true,
+      offset: 80,
+      duration: 650,
+      easing: "ease-out-cubic"
+    });
+
+    // 2) Hero load animation (GSAP)
+    window.addEventListener("load", () => {
+      gsap.fromTo(".navbar", { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
+      gsap.fromTo(".reveal",  { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, delay: 0.15, ease: "power3.out" });
+      gsap.fromTo(".reveal2", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, delay: 0.25, ease: "power3.out" });
+      gsap.fromTo(".reveal3", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: 0.35, ease: "power3.out" });
+    });
+
+    // 3) Active nav highlighting using IntersectionObserver
+    const sections = ["about","skills","projects","experience","contact"].map(id => document.getElementById(id));
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove("active"));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
+
+    sections.forEach(s => s && obs.observe(s));
+
+    // 4) Copy email micro-interaction
+    const copyEmailBtn = document.getElementById("copyEmailBtn");
+    const copyEmailHint = document.getElementById("copyEmailHint");
+    copyEmailBtn?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("khushalsehrawat28@gmail.com");
+        copyEmailHint.textContent = "(copied)";
+        gsap.fromTo(copyEmailBtn, { scale: 1 }, { scale: 1.02, yoyo: true, repeat: 1, duration: 0.12 });
+        setTimeout(()=> copyEmailHint.textContent="(click to copy)", 1200);
+      } catch {
+        copyEmailHint.textContent = "(copy failed)";
+        setTimeout(()=> copyEmailHint.textContent="(click to copy)", 1200);
+      }
+    });
+
+    // 5) "Back to top" button
+    document.getElementById("toTopBtn")?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // 6) Keyboard shortcuts (premium touch)
+    document.addEventListener("keydown", (e) => {
+      if (e.key.toLowerCase() === "g") document.querySelector('#projects')?.scrollIntoView({ behavior: "smooth" });
+      if (e.key.toLowerCase() === "c") document.querySelector('#contact')?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 7) Mailto builder (no backend needed)
+    document.getElementById("mailtoForm")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("mName").value.trim();
+      const company = document.getElementById("mCompany").value.trim();
+      const role = document.getElementById("mRole").value.trim();
+      const msg = document.getElementById("mMsg").value.trim();
+
+      const subject = encodeURIComponent(`Hiring Conversation: ${role} — ${company}`);
+      const body = encodeURIComponent(
+`Hi Khushal,
+
+I’m ${name} from ${company}. We’re hiring for ${role}.
+
+${msg}
+
+Could you share:
+1) Your availability for an interview
+2) Project links you recommend we review first
+
+Thanks,
+${name}`
+      );
+
+      window.location.href = `mailto:khushalsehrawat28@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    // 8) Project details modal (keeps page clean + premium)
+    const projectData = {
+      sentinel: {
+        title: "SentinelAI — GenAI Incident Intelligence",
+        desc: "GenAI-powered incident analysis system that interprets security logs, extracts root-cause insights, assigns severity, and enables chat-based troubleshooting over historical incidents.",
+        tags: ["Spring Boot","JWT","MySQL","REST APIs","LLM-assisted analysis","Dashboard"],
+        bullets: [
+          "Automates severity classification (LOW → CRITICAL) and reduces manual triage effort",
+          "Chat assistant for natural-language debugging and step-by-step fixes",
+          "JWT-secured platform with persistence + history tracking"
+        ],
+        value: "Shows backend leadership: security, architecture, practical AI integration, and operations-oriented UX.",
+        link: "YOUR_GITHUB_SENTINELAI"
+      },
+      suems: {
+        title: "SUEMS — Smart Urban Energy Management System",
+        desc: "Real-time renewable energy analytics platform simulating solar, wind, and grid data using schedulers and APIs; designed for scalability and future IoT integration.",
+        tags: ["Spring Boot","Schedulers","REST APIs","Docker","PostgreSQL","Architecture"],
+        bullets: [
+          "Simulated and analyzed energy streams at regular intervals",
+          "Designed modular architecture for smart-city scale use-cases",
+          "Production-style delivery with containerization"
+        ],
+        value: "Demonstrates system design thinking + real deployment: the exact signals recruiters look for.",
+        link: "YOUR_GITHUB_SUEMS"
+      },
+      hospital: {
+        title: "DuskyHospital — Hospital Management API",
+        desc: "Role-based backend APIs to manage patients, doctors, appointments, tests, diseases, and billing—built with Spring Security + JWT.",
+        tags: ["Spring Security","JWT","RBAC","MySQL","JPA/Hibernate","REST APIs"],
+        bullets: [
+          "Clear RBAC model: Admin vs Doctor vs Patient",
+          "Structured endpoints for core hospital workflows",
+          "Production-grade patterns: authentication + persistence"
+        ],
+        value: "Proves you can deliver real-world domain APIs with security, data integrity, and clean structure.",
+        link: "YOUR_GITHUB_DUSKYHOSPITAL"
+      },
+      loan: {
+        title: "BeneLoan — Loan & Beneficiary Management",
+        desc: "Secure backend system with JWT authentication, CSV upload/validation, and integrity-focused schema between beneficiaries and loans.",
+        tags: ["Java 21","JWT","MySQL","REST APIs","CSV Import","Validation"],
+        bullets: [
+          "CSV ingestion with validation and clean error handling",
+          "Schema designed for integrity across entities",
+          "Built for scalability and maintainability"
+        ],
+        value: "Signals backend maturity: data pipelines, validations, security, and clean API design.",
+        link: "YOUR_GITHUB_BENELOAN"
+      }
+    };
+
+    const modalEl = document.getElementById('projectModal');
+    const modal = modalEl ? new bootstrap.Modal(modalEl) : null;
+
+    document.querySelectorAll('[data-project]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-project');
+        const p = projectData[key];
+        if (!p) return;
+
+        document.getElementById('projectTitle').textContent = p.title;
+        document.getElementById('projectDesc').textContent = p.desc;
+
+        const tagsWrap = document.getElementById('projectTags');
+        tagsWrap.innerHTML = "";
+        p.tags.forEach(t => {
+          const span = document.createElement('span');
+          span.className = "tag";
+          span.textContent = t;
+          tagsWrap.appendChild(span);
+        });
+
+        const ul = document.getElementById('projectBullets');
+        ul.innerHTML = "";
+        p.bullets.forEach(b => {
+          const li = document.createElement('li');
+          li.textContent = b;
+          ul.appendChild(li);
+        });
+
+        document.getElementById('projectValue').textContent = p.value;
+
+        const link = document.getElementById('projectLink');
+        link.href = p.link || "#";
+        link.classList.toggle("disabled", !p.link || p.link.includes("YOUR_"));
+
+        modal?.show();
+
+        // subtle pop animation for premium feel
+        gsap.fromTo(".modal-content", { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power2.out" });
+      });
+    });
+  </script>
+</body>
+</html>
