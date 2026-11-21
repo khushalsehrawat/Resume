@@ -12,7 +12,7 @@ Fonts, styles and libraries are loaded from external services and require an int
 
 Khushal Sehrawat is identified as the portfolio author; TheBenzzCreations is identified as the website creator. Twitter card metadata and an Open Graph site name supplement the existing search and social metadata.
 
-The existing JSON-LD block now contains one graph with the original Person record and a WebSite record. The website references that Person as author and TheBenzzCreations as creator. A visible developer credit appears in the existing footer with `rel="noopener noreferrer nofollow"` for the promotional link.
+The existing JSON-LD block now contains one graph with the original Person record and a WebSite record. The website references that Person as author and TheBenzzCreations as creator. A visible developer credit appears in the existing footer with `rel="nofollow"` for the promotional link.
 
 The portfolio's public URL has not been verified. Canonical links, `og:url` and the WebSite `url` are omitted until that URL is confirmed. Do not use the developer website or a linked GitHub profile as the portfolio's canonical URL. No dedicated social preview image is configured. Structured data does not guarantee search rich results.
 
