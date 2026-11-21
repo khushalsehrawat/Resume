@@ -1,0 +1,12 @@
+{
+  "sites": [
+    {
+      "name": "Resume",
+      "root": ".",
+      "base_url": "https://khushalsehrawat.github.io/Resume/",
+      "pages": {
+        "index.html": "https://khushalsehrawat.github.io/Resume/"
+      }
+    }
+  ]
+}
